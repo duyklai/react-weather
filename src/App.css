@@ -1,22 +1,96 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #292929;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.title {
+  color: #ffa71a;
+  text-align: center;
+  font-size: 25px;
+  text-shadow: 2px 2px black;
+}
+
+.location-form {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+input[type='text'] {
+  background-color: transparent;
+  border: 0;
+  border-bottom: solid 1px #ffa71a;
+  width: 19%;
+  padding-bottom: 4px;
   color: white;
+  /* font-weight: lighter; */
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  margin-right: 20px;
+  font-size: 20px;
+  outline: none;
 }
 
-.App-link {
-  color: #09d3ac;
+input[type='submit'] {
+  border: 0;
+  padding: 8px 20px;
+  border-radius: 2px;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ffa71a;
+}
+
+input[type='submit']:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.weather-tile {
+  text-align: center;
+  color: white;
+  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
+  border-radius: 15px;
+  /* linear-gradient(135deg, #443bc4 0%, #428bdd 100%);*/
+  /* width: 30%; */
+  margin: auto;
+
+  padding: 30px;
+  position: relative;
+  width: 400px;
+  height: 285px;
+  text-shadow: 2px 2px black;
+  box-shadow: 10px 5px 5px black;
+}
+
+.weather-tile i {
+  display: inline-flex;
+  vertical-align: middle;
+  padding: 0 5px 5px 0;
+}
+
+.date-info {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  text-align: left;
+  color: white;
+  font-size: 25px;
+}
+
+.weather-info {
+  text-align: center;
+  padding-top: 200px;
+}
+
+.weather-temp {
+  font-size: 50px;
+}
+
+.weather-condition {
+  text-transform: capitalize;
 }
