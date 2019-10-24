@@ -5,7 +5,6 @@ This basic application was built with the goal of learning fetching API, utilizi
 When page loads, there are two input fields which prompts user to enter city and country name. When submitted, the form will take user input and fetch [Openweathermap API](https://openweathermap.org/api) to collect data on the current weather condition of said city, country. Additionally, there will be another box below the "current condition" which prints the forecast of the next 3 day (at time 9AM locally to inputted location). User can enter new cities/countries to see weather in other locations. If user does not enter in both input fields, an error message will pop up, telling user to complete the form.
 
 Possible updates/todos: Changing color of boxes/div to match day/night cycle and/or weather effects.
-Adding a time for forecast and current weather
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
