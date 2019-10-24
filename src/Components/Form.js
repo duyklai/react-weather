@@ -1,6 +1,7 @@
 import React from 'react';
 
 // Made into stateless function components
+// Responsible for showing input forms
 const Form = props => (
   <div className="form-div">
     <form className="location-form" onSubmit={props.getWeather}>

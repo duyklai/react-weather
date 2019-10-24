@@ -1,6 +1,7 @@
 import React from 'react';
 
 // Made into stateless function components
+// Responsible for showing current weather
 const Weather = props => (
   <div className={'weather-tile ' + (props.visible ? '' : 'hidden')}>
     <div className="date-info">

@@ -6,7 +6,6 @@ import Weather from './Components/Weather';
 import Forecast from './Components/Forecast';
 
 const API_KEY = 'cb097335fd62f4cf147aefee07730478';
-// My link https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cb097335fd62f4cf147aefee07730478&units=imperial
 
 class App extends React.Component {
   /* OLD REACT
@@ -46,6 +45,7 @@ class App extends React.Component {
     error: undefined
   };
 
+  // Function to convert UNIX time of API from openweathermap to get date
   timeConverter(UNIX_timestamp) {
     var full_date = new Date(UNIX_timestamp * 1000);
     var months = [
@@ -110,10 +110,12 @@ class App extends React.Component {
         description_day4: forecast.list[18].weather[0].description,
         weather_icon_day4: forecast.list[18].weather[0].icon,
 
+        // Show div boxes when city and country have been successfully submitted
         visible: true,
         error: ''
       });
     } else {
+      // When user does not fill out the form completely
       this.setState({
         error: 'Please enter a city and country'
       });
@@ -136,6 +138,7 @@ class App extends React.Component {
           weather_icon={this.state.weather_icon}
           visible={this.state.visible}
         />
+        {/* Passing all data of forecast of states to display on page */}
         <Forecast
           date2={this.state.date_forecast_day2}
           temperature2={this.state.temp_forecast_day2}

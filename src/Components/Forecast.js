@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Responsible for showing forecast div below the current weather
 const Forecast = props => (
   <div className={'forecast-tile' + (props.visible ? '' : 'hidden')}>
     <div className="day2">
