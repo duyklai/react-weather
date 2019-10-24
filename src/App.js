@@ -68,6 +68,13 @@ class App extends React.Component {
     return time;
   }
 
+  hourConverter(UNIX_timestamp) {
+    var full_date = new Date(UNIX_timestamp * 1000);
+    var hour = full_date.getHours();
+    var time = hour;
+    return time;
+  }
+
   getWeather = async e => {
     // Prevent refresh of page
     e.preventDefault();
@@ -88,12 +95,12 @@ class App extends React.Component {
       const forecast = await fetch_forecast.json();
       // calculate the array distance between current data and next day data
       // weather data from api contains data of 3h periods
-      console.log(forecast.list[0].dt_txt);
-      let currentTime = forecast.list[0].dt_txt.split(' ')[1].split(':')[0];
-      let difference = (24 - currentTime) / 3 + 4;
-      if (difference === 12) {
-        difference = 11;
-      }
+      console.log(data);
+      let currentTime = this.hourConverter(forecast.list[0].dt);
+      let difference = Math.ceil((24 - currentTime) / 3);
+      // if (difference === 12) {
+      //   difference = 11;
+      // }
       console.log(currentTime);
       console.log(difference);
       console.log(forecast);
@@ -105,20 +112,26 @@ class App extends React.Component {
         description: data.weather[0].description,
         weather_icon: data.weather[0].icon,
 
-        date_forecast_day2: this.timeConverter(forecast.list[11].dt),
-        temp_forecast_day2: Math.round(forecast.list[11].main.temp),
-        description_day2: forecast.list[11].weather[0].description,
-        weather_icon_day2: forecast.list[11].weather[0].icon,
+        date_forecast_day2: this.timeConverter(forecast.list[difference].dt),
+        temp_forecast_day2: Math.round(forecast.list[difference].main.temp),
+        description_day2: forecast.list[difference].weather[0].description,
+        weather_icon_day2: forecast.list[difference].weather[0].icon,
 
-        date_forecast_day3: this.timeConverter(forecast.list[19].dt),
-        temp_forecast_day3: Math.round(forecast.list[19].main.temp),
-        description_day3: forecast.list[19].weather[0].description,
-        weather_icon_day3: forecast.list[19].weather[0].icon,
+        date_forecast_day3: this.timeConverter(
+          forecast.list[difference + 8].dt
+        ),
+        temp_forecast_day3: Math.round(forecast.list[difference + 8].main.temp),
+        description_day3: forecast.list[difference + 8].weather[0].description,
+        weather_icon_day3: forecast.list[difference + 8].weather[0].icon,
 
-        date_forecast_day4: this.timeConverter(forecast.list[27].dt),
-        temp_forecast_day4: Math.round(forecast.list[27].main.temp),
-        description_day4: forecast.list[27].weather[0].description,
-        weather_icon_day4: forecast.list[27].weather[0].icon,
+        date_forecast_day4: this.timeConverter(
+          forecast.list[difference + 16].dt
+        ),
+        temp_forecast_day4: Math.round(
+          forecast.list[difference + 16].main.temp
+        ),
+        description_day4: forecast.list[difference + 16].weather[0].description,
+        weather_icon_day4: forecast.list[difference + 16].weather[0].icon,
 
         // Show div boxes when city and country have been successfully submitted
         visible: true,
