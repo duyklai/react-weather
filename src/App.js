@@ -6,7 +6,7 @@ import Weather from './Components/Weather';
 import Forecast from './Components/Forecast';
 
 const API_KEY = 'cb097335fd62f4cf147aefee07730478';
-// My link http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cb097335fd62f4cf147aefee07730478&units=imperial
+// My link https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cb097335fd62f4cf147aefee07730478&units=imperial
 
 class App extends React.Component {
   /* OLD REACT
@@ -78,12 +78,12 @@ class App extends React.Component {
     if (city && country) {
       // Getting current weather
       const fetch_weather = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=${API_KEY}&units=imperial`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=${API_KEY}&units=imperial`
       );
       const data = await fetch_weather.json();
       // Getting forecast weather
       const fetch_forecast = await fetch(
-        `http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=${API_KEY}&units=imperial`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=${API_KEY}&units=imperial`
       );
       const forecast = await fetch_forecast.json();
 
