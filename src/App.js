@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './App.css';
 import Title from './Components/Title';
 import Form from './Components/Form';
 import Weather from './Components/Weather';
+import Forecast from './Components/Forecast';
 
 const API_KEY = 'cb097335fd62f4cf147aefee07730478';
 // My link http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cb097335fd62f4cf147aefee07730478&units=imperial
@@ -20,13 +20,54 @@ class App extends React.Component {
 
   // Initial state of object
   state = {
+    date: undefined,
     temperature: undefined,
     city: undefined,
     country: undefined,
-    humidity: undefined,
     description: undefined,
+    weather_icon: undefined,
+
+    date_forecast_day2: undefined,
+    temp_forecast_day2: undefined,
+    description_day2: undefined,
+    weather_icon_day2: undefined,
+
+    date_forecast_day3: undefined,
+    temp_forecast_day3: undefined,
+    description_day3: undefined,
+    weather_icon_day3: undefined,
+
+    date_forecast_day4: undefined,
+    temp_forecast_day4: undefined,
+    description_day4: undefined,
+    weather_icon_day4: undefined,
+
+    visible: false,
     error: undefined
   };
+
+  timeConverter(UNIX_timestamp) {
+    var full_date = new Date(UNIX_timestamp * 1000);
+    var months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
+    var month = months[full_date.getMonth()];
+    var date = full_date.getDate();
+    var time = month + ', ' + date;
+    return time;
+  }
+
   getWeather = async e => {
     // Prevent refresh of page
     e.preventDefault();
@@ -35,17 +76,41 @@ class App extends React.Component {
 
     // Checking for non-empty input in form
     if (city && country) {
+      // Getting current weather
       const fetch_weather = await fetch(
         `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=${API_KEY}&units=imperial`
       );
       const data = await fetch_weather.json();
-      console.log(data);
+      // Getting forecast weather
+      const fetch_forecast = await fetch(
+        `http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=${API_KEY}&units=imperial`
+      );
+      const forecast = await fetch_forecast.json();
+
       this.setState({
-        temperature: data.main.temp,
+        date: this.timeConverter(data.dt),
+        temperature: Math.round(data.main.temp),
         city: data.name,
         country: data.sys.country,
-        humidity: data.main.humidity,
         description: data.weather[0].description,
+        weather_icon: data.weather[0].icon,
+
+        date_forecast_day2: this.timeConverter(forecast.list[2].dt),
+        temp_forecast_day2: Math.round(forecast.list[2].main.temp),
+        description_day2: forecast.list[2].weather[0].description,
+        weather_icon_day2: forecast.list[2].weather[0].icon,
+
+        date_forecast_day3: this.timeConverter(forecast.list[10].dt),
+        temp_forecast_day3: Math.round(forecast.list[10].main.temp),
+        description_day3: forecast.list[10].weather[0].description,
+        weather_icon_day3: forecast.list[10].weather[0].icon,
+
+        date_forecast_day4: this.timeConverter(forecast.list[18].dt),
+        temp_forecast_day4: Math.round(forecast.list[18].main.temp),
+        description_day4: forecast.list[18].weather[0].description,
+        weather_icon_day4: forecast.list[18].weather[0].icon,
+
+        visible: true,
         error: ''
       });
     } else {
@@ -59,15 +124,32 @@ class App extends React.Component {
       <div>
         <Title />
         {/* Passing prop of getweather function to form so when submitting, can call function */}
-        <Form getWeather={this.getWeather} />
+        {/* Passing error message when form is not filled out correctly */}
+        <Form getWeather={this.getWeather} error={this.state.error} />
         {/* Passing prop of states to display on page */}
         <Weather
+          date={this.state.date}
           temperature={this.state.temperature}
           city={this.state.city}
           country={this.state.country}
-          humidity={this.state.humidity}
           description={this.state.description}
-          error={this.state.error}
+          weather_icon={this.state.weather_icon}
+          visible={this.state.visible}
+        />
+        <Forecast
+          date2={this.state.date_forecast_day2}
+          temperature2={this.state.temp_forecast_day2}
+          description2={this.state.description_day2}
+          weather_icon2={this.state.weather_icon_day2}
+          date3={this.state.date_forecast_day3}
+          temperature3={this.state.temp_forecast_day3}
+          description3={this.state.description_day3}
+          weather_icon3={this.state.weather_icon_day3}
+          date4={this.state.date_forecast_day4}
+          temperature4={this.state.temp_forecast_day4}
+          description4={this.state.description_day4}
+          weather_icon4={this.state.weather_icon_day4}
+          visible={this.state.visible}
         />
       </div>
     );
