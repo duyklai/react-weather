@@ -94,16 +94,9 @@ class App extends React.Component {
       );
       const forecast = await fetch_forecast.json();
       // calculate the array distance between current data and next day data
-      // weather data from api contains data of 3h periods
-      console.log(data);
-      let currentTime = this.hourConverter(forecast.list[0].dt);
-      let difference = Math.ceil((24 - currentTime) / 3);
-      // if (difference === 12) {
-      //   difference = 11;
-      // }
-      console.log(currentTime);
-      console.log(difference);
-      console.log(forecast);
+      let currentTime = this.hourConverter(data.dt);
+      let difference = Math.ceil((24 - currentTime) / 3) + 2;
+
       this.setState({
         date: this.timeConverter(data.dt),
         temperature: Math.round(data.main.temp),
