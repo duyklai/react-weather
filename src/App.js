@@ -93,8 +93,9 @@ class App extends React.Component {
         `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=${API_KEY}&units=imperial`
       );
       const forecast = await fetch_forecast.json();
-      // calculate the array distance between current data and next day data
+      // Calculate the current time to next day's time and center it around 10am local time
       let currentTime = this.hourConverter(data.dt);
+      if (currentTime === 0) currentTime = 1;
       let difference = Math.ceil((24 - currentTime) / 3) + 2;
 
       this.setState({
