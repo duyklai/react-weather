@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "dotenv": "^8.2.0",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-scripts": "3.2.0"
   },
   "scripts": {
@@ -33,6 +33,6 @@
   },
   "homepage": "https://duyklai.github.io/react-weather/",
   "devDependencies": {
-    "gh-pages": "^2.1.1"
+    "gh-pages": "^2.2.0"
   }
 }
