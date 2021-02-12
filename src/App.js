@@ -1,11 +1,12 @@
-import React from 'react';
-import './App.css';
-import Title from './Components/Title';
-import Form from './Components/Form';
-import Weather from './Components/Weather';
-import Forecast from './Components/Forecast';
+import React from "react";
+import "./App.css";
+import Title from "./Components/Title";
+import Form from "./Components/Form";
+import Weather from "./Components/Weather";
+import Forecast from "./Components/Forecast";
+require("dotenv").config();
 
-const API_KEY = 'cb097335fd62f4cf147aefee07730478';
+const API_KEY = process.env.REACT_APP_AUTH_TOKEN;
 
 class App extends React.Component {
   /* OLD REACT
@@ -42,29 +43,29 @@ class App extends React.Component {
     weather_icon_day4: undefined,
 
     visible: false,
-    error: undefined
+    error: undefined,
   };
 
   // Function to convert UNIX time of API from openweathermap to get date
   timeConverter(UNIX_timestamp) {
     var full_date = new Date(UNIX_timestamp * 1000);
     var months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec'
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
     ];
     var month = months[full_date.getMonth()];
     var date = full_date.getDate();
-    var time = month + ', ' + date;
+    var time = month + ", " + date;
     return time;
   }
 
@@ -75,7 +76,7 @@ class App extends React.Component {
     return time;
   }
 
-  getWeather = async e => {
+  getWeather = async (e) => {
     // Prevent refresh of page
     e.preventDefault();
     const city = e.target.elements.city.value;
@@ -129,12 +130,12 @@ class App extends React.Component {
 
         // Show div boxes when city and country have been successfully submitted
         visible: true,
-        error: ''
+        error: "",
       });
     } else {
       // When user does not fill out the form completely
       this.setState({
-        error: 'Please enter a city and country'
+        error: "Please enter a city and country",
       });
     }
   };
